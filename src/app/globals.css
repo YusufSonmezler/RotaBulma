@@ -4,12 +4,12 @@
 
 :root {
   --background: #fff;
-  --foreground: #171717;
+  --foreground: #ffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #e9e9e9;
     --foreground: #e44949;
   }
 }
@@ -32,21 +32,21 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7); /* A bit darker background */
+  background: rgba(0, 0, 0, 0.7); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Make sure modal is on top */
+  z-index: 1000; 
 }
 
 .modal-content {
   background: #fff;
   padding: 20px;
   border-radius: 5px;
-  width: 80%; /* Adjust width as necessary */
-  max-width: 600px; /* Maximum width for large screens */
+  width: 80%; 
+  max-width: 600px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative; /* Allow positioning of close button */
+  position: relative; 
 }
 
 .close {
