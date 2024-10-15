@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #fff;
   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #e44949;
   }
 }
 
@@ -24,4 +24,52 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* A bit darker background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure modal is on top */
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%; /* Adjust width as necessary */
+  max-width: 600px; /* Maximum width for large screens */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative; /* Allow positioning of close button */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.location-table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #fff;
+}
+
+.location-table th, .location-table td {
+  border: 1px solid #bbb;
+  padding: 10px 20px;
+}
+
+.location-table th {
+  background-color: #d1084b;
+  color: #fff;
+  font-weight: 600;
 }
