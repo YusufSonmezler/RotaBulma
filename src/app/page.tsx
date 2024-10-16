@@ -29,9 +29,9 @@ const LocationApp = () => {
         coordinates: coordinates,
       };
       setLocations([...locations, newLocation]);
-      setLocationName(''); 
-      setMarkerColor('#ff0000'); 
-      setCoordinates(null); 
+      setLocationName('');
+      setMarkerColor('#ff0000');
+      setCoordinates(null);
       setClickedLocation(null);
       localStorage.setItem('locations', JSON.stringify([...locations, newLocation]));
     }
@@ -57,16 +57,15 @@ const LocationApp = () => {
       const updatedLocations = [...locations];
       updatedLocations[currentEditingIndex] = updatedLocation;
       setLocations(updatedLocations);
-      setEditModalOpen(false); 
-      setCurrentEditingIndex(null); 
-      setLocationName(''); 
-      setMarkerColor('#ff0000'); 
-      setCoordinates(null); 
-      setClickedLocation(null); 
+      setEditModalOpen(false);
+      setCurrentEditingIndex(null);
+      setLocationName('');
+      setMarkerColor('#ff0000');
+      setCoordinates(null);
+      setClickedLocation(null);
       localStorage.setItem('locations', JSON.stringify(updatedLocations));
     }
   };
-  
 
   const handleCreateRoute = () => {
     if (routeLocations.length === 2) {
@@ -93,49 +92,85 @@ const LocationApp = () => {
 
   return (
     <div className="container mx-auto">
-      <h1>Konum Ekle</h1>
+      <h1 className="text-center">Konum Ekle</h1>
       <MapComponent
         locations={locations}
         clickedLocation={clickedLocation}
         routeLocations={routeLocations}
         onMapClick={handleLocationSelect}
       />
-      
-      <div className="grid grid-cols-4 gap-4">
-      <div>
-        <div className="mb-6 p-5">
-        <input onChange={(e) => setLocationName(e.target.value)} type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Konum Ekle" required />
+      <div className="flex flex-col items-center space-y-4">
+        <input 
+          onChange={(e) => setLocationName(e.target.value)} 
+          type="text" 
+          id="location-name" 
+          value={locationName} 
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-1/2 p-2.5" 
+          placeholder="Konum Ekle" 
+          required 
+        />
+        <div className="flex items-center space-x-2">
+          <label className="relative inline-block">
+            <input 
+              type="color" 
+              value={markerColor} 
+              onChange={(e) => setMarkerColor(e.target.value)} 
+              className="appearance-none w-10 h-10 border rounded-lg border-gray-300 focus:outline-none cursor-pointer" 
+              style={{ backgroundColor: markerColor }} 
+            />
+            <span className="absolute top-0 left-0 w-full h-full rounded-lg border border-gray-300" style={{ backgroundColor: 'transparent' }} />
+          </label>
+          <button 
+            onClick={handleSubmit} 
+            type="button" 
+            className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
+          >
+            Kaydet
+          </button>
+        </div>
       </div>
-      </div>
-      <div><input type="color" value={markerColor} onChange={(e) => setMarkerColor(e.target.value)} /></div>
-      <div><button onClick={handleSubmit} type="button" className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Kaydet</button></div>
-      </div>
-      
-      
-      <h2>Kaydedilmiş Konumlar</h2>
+
+      <h2 className="text-center">Kaydedilmiş Konumlar</h2>
       <LocationList
         locations={locations}
         openEditModal={openEditModal}
         selectForRoute={selectForRoute}
       />
+
       <button onClick={handleCreateRoute} disabled={routeLocations.length !== 2}>
-        Rota Oluştur
+        Kuş Uçuşu Mesafe Ölç
       </button>
       <Modal isOpen={editModalOpen} onClose={closeEditModal}>
         <h2>Konum Düzenle</h2>
-        <input
-          type="text"
-          value={locationName}
-          onChange={(e) => setLocationName(e.target.value)}
+        <input 
+          onChange={(e) => setLocationName(e.target.value)} 
+          type="text" 
+          id="location-name" 
+          value={locationName} 
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-1/2 p-2.5" 
+          placeholder="Konum Düzenle" 
+          required 
         />
-        <input type="color" value={markerColor} onChange={(e) => setMarkerColor(e.target.value)} />
+        <input 
+              type="color" 
+              value={markerColor} 
+              onChange={(e) => setMarkerColor(e.target.value)} 
+              className="appearance-none w-10 h-10 border rounded-lg border-gray-300 focus:outline-none cursor-pointer" 
+              style={{ backgroundColor: markerColor }} 
+            />
         <MapComponent
           locations={[]}
           clickedLocation={clickedLocation}
           routeLocations={[]}
           onMapClick={handleLocationSelect}
         />
-        <button onClick={handleUpdate}>Güncelle</button>
+        <button 
+            onClick={handleUpdate} 
+            type="button" 
+            className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
+          >
+            Güncelle
+          </button>
       </Modal>
     </div>
   );

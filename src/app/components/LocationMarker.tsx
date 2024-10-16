@@ -14,7 +14,6 @@ const LocationMarker = ({ location, index, selectForRoute }) => {
       <Popup>
         {`${location.name} - Enlem: ${location.coordinates.lat.toFixed(5)}, Boylam: ${location.coordinates.lng.toFixed(5)}`}
         <br />
-        <button onClick={() => selectForRoute(index)}>Rota Oluştur</button>
       </Popup>
     </Marker>
   );
